@@ -1,0 +1,140 @@
+# Linux Basics - Day 1
+
+## Print text
+
+echo "Hello, World!"
+
+**Purpose:** Prints text or variables to the terminal.
+
+**Example Output:**
+
+Hello, World!
+
+
+---
+
+## Display user and group information
+
+id
+
+**Purpose:** Displays your user ID (UID), group ID (GID), and the groups you belong to.
+
+**Example Output:**
+
+uid=1000(username) gid=1000(username) groups=1000(username),27(sudo)
+
+
+---
+
+## Display only the username
+
+id -un
+
+**Purpose:** Displays only the current user's username.
+
+**Example Output:**
+
+username
+
+
+---
+
+## Display the current logged-in user
+
+whoami
+
+**Purpose:** Prints the username of the current user.
+
+**Example Output:**
+
+username
+
+
+**Note:** `whoami` and `id -un` usually produce the same output.
+
+---
+
+## Update package list
+
+sudo apt update
+
+**Purpose:** Updates the package index from configured repositories.
+
+---
+
+## Check available package upgrades
+
+
+apt list --upgradable
+
+
+**Purpose:** Lists packages that have newer versions available.
+
+---
+
+## Upgrade installed packages
+
+
+sudo apt upgrade
+
+
+**Purpose:** Installs the latest versions of installed packages.
+
+---
+
+## Perform a full upgrade
+
+
+sudo apt full-upgrade
+
+
+**Purpose:** Upgrades packages and resolves dependency changes if needed.
+
+---
+
+## Remove unused packages
+
+
+sudo apt autoremove
+
+**Purpose:** Removes packages that are no longer required.
+
+---
+
+## Reboot the system
+
+
+sudo reboot
+
+
+**Purpose:** Restarts the system.
+
+---
+
+## Check disk usage
+
+
+df -h
+
+
+**Purpose:** Displays disk space usage in a human-readable format.
+
+---
+
+## Check Git version
+
+
+git --version
+
+
+**Purpose:** Displays the installed Git version.
+
+---
+
+## Open the current folder in Visual Studio Code
+
+
+code .
+
+
+**Purpose:** Opens the current directory in VS Code.
