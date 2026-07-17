@@ -138,3 +138,13 @@ code .
 
 
 **Purpose:** Opens the current directory in VS Code.
+
+## apt
+
+`apt` stands for Advanced Package Tool. It is used to manage software packages in Debian-based Linux distributions such as Ubuntu.
+
+## sudo
+
+`sudo` stands for "superuser do". It allows a permitted normal user to execute a specific command with administrator (root) privileges.
+
+`sudo` provides elevated privileges for the command being executed. It does not permanently make the user root.
