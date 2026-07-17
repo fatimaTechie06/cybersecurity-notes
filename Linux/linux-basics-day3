@@ -1,0 +1,265 @@
+# Day 3: Viewing and Comparing File Contents in Linux
+
+Today, I learned how to view the contents of files and compare files and directories using Linux commands.
+
+The main commands covered were:
+
+- `cat`
+- `head`
+- `tail`
+- `diff`
+- `man`
+
+---
+
+1. The `cat` Command
+
+The `cat` command is used to display the entire contents of a file in the terminal.
+
+Syntax
+
+
+cat filename
+Example
+
+Suppose we have a file called hello:
+
+cat /tmp/hello
+Output
+Hi,
+I am Labby!
+
+The complete contents of the file are displayed.
+
+2. Display File Contents with Line Numbers
+
+The -n option with cat displays the contents of a file along with line numbers.
+
+Syntax
+cat -n filename
+Example
+cat -n /tmp/hello
+Output
+     1  Hi,
+     2  I am Labby!
+
+This is useful when we need to identify specific lines in a file.
+
+3. The head Command
+
+The head command is used to display the beginning of a file.
+
+By default, it displays the first 10 lines of a file.
+
+Syntax
+head filename
+Example
+head /tmp/hello
+Display a Specific Number of Lines
+
+The -n option allows us to specify how many lines should be displayed.
+
+Example
+head -n 1 /tmp/hello
+
+This displays the first line of the file.
+
+Hi,
+
+Another way to write the same command is:
+
+head -1 /tmp/hello
+Display a Specific Number of Bytes
+
+The -c option displays a specific number of bytes from the beginning of a file.
+
+Example
+head -c 3 /tmp/hello
+
+This displays the first 3 bytes of the file.
+
+Syntax
+head -c number filename
+
+For example:
+
+head -c 5 filename
+
+This displays the first 5 bytes.
+
+4. The tail Command
+
+The tail command is used to display the end of a file.
+
+By default, it displays the last 10 lines of a file.
+
+Syntax
+tail filename
+Example
+tail /tmp/hello
+Display a Specific Number of Lines from the End
+
+The -n option displays a specific number of lines from the end of a file.
+
+Example
+tail -n 1 /tmp/hello
+
+This displays the last line of the file.
+
+I am Labby!
+
+Another way to write the same command is:
+
+tail -1 /tmp/hello
+Display a Specific Number of Bytes from the End
+
+The -c option displays a specific number of bytes from the end of a file.
+
+Example
+tail -c 2 /tmp/hello
+Syntax
+tail -c number filename
+5. The diff Command
+
+The diff command is used to compare the contents of two files.
+
+It shows the differences between the files.
+
+Syntax
+diff file1 file2
+Example
+
+Suppose we have two files:
+
+file1
+this is file1
+file2
+this is file2
+
+Now we can compare them:
+
+diff file1 file2
+Output
+1c1
+< this is file1
+---
+> this is file2
+Understanding the Output
+< means the content comes from the first file.
+> means the content comes from the second file.
+c means the line was changed.
+
+So, the command is showing that the first line of file1 is different from the first line of file2.
+
+6. Comparing Directories with diff -r
+
+The -r option means recursive.
+
+It allows diff to compare the contents of entire directories, including files inside subdirectories.
+
+Syntax
+diff -r directory1 directory2
+Example
+diff -r ~/Desktop ~/Code
+
+This compares the contents of the Desktop and Code directories.
+
+It can show files that exist in one directory but not in the other.
+
+Example Output
+Only in /home/user/Desktop: code.desktop
+Only in /home/user/Desktop: gedit.desktop
+Only in /home/user/Desktop: xfce4-terminal.desktop
+
+This means these files exist in the Desktop directory but not in the Code directory.
+
+7. Important Difference: Relative and Absolute Paths
+
+While working with directories, I also learned about path types.
+
+Relative Path
+
+A relative path starts from the current directory.
+
+Example:
+
+cd project
+
+This tries to enter a directory named project inside the current directory.
+
+If the directory does not exist, Linux displays:
+
+No such file or directory
+Absolute Path
+
+An absolute path starts from the root directory /.
+
+Example:
+
+cd /project
+
+This looks for a directory named project directly inside the root directory.
+
+Home Directory Shortcut
+
+The ~ symbol represents the current user's home directory.
+
+Example:
+
+cd ~/project
+
+This means:
+
+Go to the project directory inside my home directory.
+
+For example:
+
+/home/username/project
+8. The man Command
+
+The man command displays the manual page for a Linux command.
+
+It is useful when we forget how a command works or want to learn about its options.
+
+Syntax
+man command
+Examples
+man cat
+man head
+man tail
+man diff
+
+The manual page provides detailed information about:
+
+Command description
+Syntax
+Options
+Available flags
+Examples and technical details
+9. Quick Command Reference
+Command	Purpose
+cat file	Display the entire contents of a file
+cat -n file	Display file contents with line numbers
+head file	Display the beginning of a file
+head -n 5 file	Display the first 5 lines
+head -c 5 file	Display the first 5 bytes
+tail file	Display the end of a file
+tail -n 5 file	Display the last 5 lines
+tail -c 5 file	Display the last 5 bytes
+diff file1 file2	Compare two files
+diff -r dir1 dir2	Recursively compare two directories
+man command	Open the manual page for a command
+10. What I Learned Today
+
+Today, I learned how to:
+
+View the complete contents of a file using cat.
+Display file contents with line numbers using cat -n.
+View the beginning of a file using head.
+View the end of a file using tail.
+Display a specific number of lines using -n.
+Display a specific number of bytes using -c.
+Compare two files using diff.
+Compare complete directories recursively using diff -r.
+Understand relative and absolute paths.
+Use man to read the documentation of Linux commands.
