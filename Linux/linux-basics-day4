@@ -1,0 +1,449 @@
+# Linux Learning - Day 4
+## File Ownership, Permissions & Executable Scripts
+
+> **Day 4 Goal:** Learn how Linux controls access to files and directories using ownership and permissions.
+
+---
+
+# What I Learned
+
+- Creating files and directories
+- Viewing file permissions
+- Changing file ownership using `chown`
+- Changing permissions using `chmod`
+- Understanding numeric permission values
+- Recursive permission changes
+- Making shell scripts executable
+
+---
+
+# 1. Create a File
+
+The `touch` command creates an empty file.
+
+```bash
+touch example.txt
+```
+
+Verify the file:
+
+```bash
+ls
+```
+
+Output:
+
+```
+example.txt
+```
+
+---
+
+# 2. View File Permissions
+
+Use:
+
+```bash
+ls -l example.txt
+```
+
+Example Output:
+
+```text
+-rw-rw-r-- 1 labex labex 0 Jul 19 23:39 example.txt
+```
+
+### Understanding the Output
+
+```
+-rw-rw-r--
+│ │  │  │
+│ │  │  └── Others permissions
+│ │  └───── Group permissions
+│ └──────── Owner permissions
+└────────── File type
+```
+
+Permission letters:
+
+| Symbol | Meaning |
+|---------|----------|
+| r | Read |
+| w | Write |
+| x | Execute |
+| - | Permission not granted |
+
+---
+
+# 3. Change File Ownership
+
+Linux allows changing the owner of a file using `chown`.
+
+Syntax:
+
+```bash
+sudo chown owner:group filename
+```
+
+Example:
+
+```bash
+sudo chown root:root example.txt
+```
+
+Check ownership:
+
+```bash
+ls -l example.txt
+```
+
+Output:
+
+```text
+-rw-rw-r-- 1 root root 0 Jul 19 23:39 example.txt
+```
+
+Now the owner and group are both **root**.
+
+---
+
+# 4. Create Nested Directories
+
+Use `mkdir -p` to create multiple directories at once.
+
+```bash
+mkdir -p new-dir/subdir
+```
+
+Create files inside them:
+
+```bash
+echo "Hello, world" > new-dir/file1.txt
+
+echo "Another file" > new-dir/subdir/file2.txt
+```
+
+---
+
+# 5. View Directory Structure
+
+```bash
+ls -lR new-dir
+```
+
+### Option Meaning
+
+| Option | Description |
+|---------|-------------|
+| -l | Long listing format |
+| -R | Recursive listing |
+
+This displays all files and subdirectories.
+
+---
+
+# 6. Change Ownership Recursively
+
+Instead of changing one file at a time:
+
+```bash
+sudo chown -R root:root new-dir
+```
+
+### What `-R` Means
+
+`-R` stands for **Recursive**.
+
+It changes ownership of:
+
+- Main directory
+- All subdirectories
+- Every file inside
+
+Verify:
+
+```bash
+ls -lR new-dir
+```
+
+Everything should now belong to **root**.
+
+---
+
+# 7. Change File Permissions
+
+Syntax:
+
+```bash
+chmod permissions filename
+```
+
+Example:
+
+```bash
+sudo chmod 700 example.txt
+```
+
+Check:
+
+```bash
+ls -l example.txt
+```
+
+Output:
+
+```text
+-rwx------ example.txt
+```
+
+---
+
+# Understanding Permission Numbers
+
+Each permission has a numeric value.
+
+| Permission | Value |
+|------------|-------|
+| Read (r) | 4 |
+| Write (w) | 2 |
+| Execute (x) | 1 |
+
+Add them together.
+
+Examples:
+
+| Number | Permission |
+|---------|------------|
+| 7 | rwx |
+| 6 | rw- |
+| 5 | r-x |
+| 4 | r-- |
+| 0 | --- |
+
+---
+
+# What Does 700 Mean?
+
+```
+700
+│││
+││└── Others = 0 = ---
+│└── Group = 0 = ---
+└── Owner = 7 = rwx
+```
+
+Owner has full access.
+
+Everyone else has no permission.
+
+---
+
+# 8. Change Directory Permissions
+
+Create a directory:
+
+```bash
+mkdir ~/test-dir
+```
+
+Give full access only to yourself:
+
+```bash
+chmod 700 ~/test-dir
+```
+
+Check:
+
+```bash
+ls -ld ~/test-dir
+```
+
+### Why `-d`?
+
+Normally `ls` shows directory contents.
+
+`ls -d` displays information about the directory itself.
+
+---
+
+# 9. Change Permissions Recursively
+
+```bash
+chmod -R 755 ~/test-dir
+```
+
+### Meaning of 755
+
+```
+755
+│││
+││└── Others = r-x
+│└── Group = r-x
+└── Owner = rwx
+```
+
+Owner:
+
+- Read
+- Write
+- Execute
+
+Group:
+
+- Read
+- Execute
+
+Others:
+
+- Read
+- Execute
+
+---
+
+# 10. Create a Simple Bash Script
+
+Create the script:
+
+```bash
+echo "#!/bin/bash" > script.sh
+```
+
+Append another line:
+
+```bash
+echo 'echo "Hello, World"' >> script.sh
+```
+
+View it:
+
+```bash
+cat script.sh
+```
+
+Output:
+
+```bash
+#!/bin/bash
+echo "Hello, World"
+```
+
+---
+
+# 11. Try Running the Script
+
+```bash
+./script.sh
+```
+
+You may see:
+
+```text
+Permission denied
+```
+
+### Why?
+
+The script doesn't have **execute permission** yet.
+
+---
+
+# 12. Make Script Executable
+
+Grant execute permission to the owner:
+
+```bash
+chmod u+x script.sh
+```
+
+Check permissions:
+
+```bash
+ls -l script.sh
+```
+
+Output:
+
+```text
+-rwxrw-r-- script.sh
+```
+
+Now execute it:
+
+```bash
+./script.sh
+```
+
+Output:
+
+```text
+Hello, World
+```
+
+---
+
+# Symbolic chmod
+
+Instead of numbers, Linux also supports symbolic notation.
+
+| Command | Meaning |
+|----------|----------|
+| chmod u+x file | Add execute permission to owner |
+| chmod u-x file | Remove execute permission from owner |
+| chmod g+w file | Add write permission to group |
+| chmod o+r file | Add read permission to others |
+| chmod a+x file | Add execute permission to everyone |
+
+### Symbols
+
+| Symbol | Meaning |
+|---------|----------|
+| u | User (Owner) |
+| g | Group |
+| o | Others |
+| a | All |
+| + | Add permission |
+| - | Remove permission |
+| = | Set exact permission |
+
+---
+
+# Important Commands Learned
+
+```bash
+touch example.txt
+ls -l
+sudo chown root:root example.txt
+mkdir -p new-dir/subdir
+echo "Hello, world" > file.txt
+ls -lR new-dir
+sudo chown -R root:root new-dir
+chmod 700 example.txt
+mkdir ~/test-dir
+chmod 700 ~/test-dir
+chmod -R 755 ~/test-dir
+ls -ld ~/test-dir
+cat script.sh
+chmod u+x script.sh
+./script.sh
+```
+
+---
+
+# Key Takeaways
+
+- `touch` creates empty files.
+- `ls -l` displays file permissions and ownership.
+- `chown` changes file or directory ownership.
+- `chmod` changes file permissions.
+- Numeric permissions are based on Read (4), Write (2), and Execute (1).
+- `-R` applies changes recursively to directories and their contents.
+- `700` gives full access only to the owner.
+- `755` is a common permission for directories and executable files.
+- A shell script must have execute permission before it can run.
+- Symbolic permissions (`u+x`, `g+w`, etc.) provide a flexible way to modify permissions.
+
+---
+
+# Day 4 Summary
+
+Today I learned one of the most important Linux concepts: file ownership and permissions. I practiced changing file owners using `chown`, modifying permissions with `chmod` (both numeric and symbolic methods), working with recursive changes, and creating executable Bash scripts. Understanding these permissions is essential for Linux system administration, scripting, and cybersecurity because they help secure files and control who can access or modify them.
