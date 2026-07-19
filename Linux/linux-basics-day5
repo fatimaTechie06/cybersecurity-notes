@@ -1,0 +1,416 @@
+# Day 5 - Linux User Account Management
+
+> Part of my Linux Learning Journey  
+> **Day 5 Topic:** User Account Management
+
+---
+
+# Introduction
+
+Linux allows administrators to create, modify, secure, and remove user accounts. Proper user management is one of the most important responsibilities of a Linux system administrator.
+
+I learned how to:
+
+- Create users
+- Create home directories
+- Set passwords
+- Change user properties
+- Change default shell
+- Add users to groups
+- Lock and unlock user accounts
+- Delete users
+- Understand `/etc/passwd` and `/etc/shadow`
+
+---
+
+# 1. Create a New User
+
+### Syntax
+
+```bash
+sudo useradd username
+```
+
+### Example
+
+```bash
+sudo useradd joker
+```
+
+This creates a new user named **joker**.
+
+> By default, a home directory may not be created unless specified.
+
+---
+
+# 2. Verify the User
+
+Use the following command:
+
+```bash
+grep -w 'joker' /etc/passwd
+```
+
+### Output
+
+```
+joker:x:5001:5001::/home/joker:/bin/sh
+```
+
+### Explanation
+
+The `/etc/passwd` file stores basic information about every user.
+
+Each field is separated by `:`.
+
+Example:
+
+```
+joker:x:5001:5001::/home/joker:/bin/sh
+```
+
+| Field | Meaning |
+|--------|---------|
+| joker | Username |
+| x | Password stored in `/etc/shadow` |
+| 5001 | User ID (UID) |
+| 5001 | Group ID (GID) |
+| (blank) | User description |
+| /home/joker | Home directory |
+| /bin/sh | Default shell |
+
+---
+
+# 3. Create User with Home Directory
+
+Normally:
+
+```bash
+sudo useradd bob
+```
+
+doesn't create a home directory.
+
+To create one automatically:
+
+```bash
+sudo useradd -m bob
+```
+
+The `-m` option creates the user's home directory.
+
+Verify it:
+
+```bash
+sudo ls -ld /home/bob
+```
+
+Example output:
+
+```
+drwxr-x--- 2 bob bob ...
+```
+
+---
+
+# 4. Set User Password
+
+Syntax
+
+```bash
+sudo passwd username
+```
+
+Example
+
+```bash
+sudo passwd joker
+```
+
+You'll be asked to enter and confirm the password.
+
+Example:
+
+```
+New password:
+Retype new password:
+passwd: password updated successfully
+```
+
+---
+
+# 5. Change User Home Directory
+
+Syntax
+
+```bash
+sudo usermod -d new_home_directory username
+```
+
+Example
+
+```bash
+sudo usermod -d /home/wayne joker
+```
+
+Verify:
+
+```bash
+grep -w 'joker' /etc/passwd
+```
+
+Output:
+
+```
+joker:x:5001:5001::/home/wayne:/bin/sh
+```
+
+> **Note:** This changes only the home directory path in the user configuration. It does **not** create the new directory automatically.
+
+---
+
+# 6. Change Default Shell
+
+Syntax
+
+```bash
+sudo usermod -s shell_path username
+```
+
+Example
+
+```bash
+sudo usermod -s /bin/bash joker
+```
+
+Verify:
+
+```bash
+grep -w 'joker' /etc/passwd
+```
+
+Output:
+
+```
+joker:x:5001:5001::/home/wayne:/bin/bash
+```
+
+Now the user's default shell is Bash.
+
+---
+
+# 7. Add User to a Group
+
+Syntax
+
+```bash
+sudo usermod -aG group_name username
+```
+
+Example
+
+```bash
+sudo usermod -aG sudo joker
+```
+
+The options mean:
+
+- `-a` → Append (don't remove existing groups)
+- `-G` → Supplementary groups
+
+Check the groups:
+
+```bash
+groups joker
+```
+
+Output:
+
+```
+joker : joker sudo
+```
+
+Now the user belongs to the **sudo** group.
+
+---
+
+# 8. Switch to Another User
+
+Command
+
+```bash
+su - joker
+```
+
+You'll be prompted for the user's password.
+
+This opens a login shell for that user.
+
+---
+
+# 9. View Encrypted Password Information
+
+Linux stores encrypted passwords in:
+
+```bash
+/etc/shadow
+```
+
+View it with:
+
+```bash
+sudo cat /etc/shadow
+```
+
+Example entry:
+
+```
+joker:$y$j9T$...:20653:0:99999:7:::
+```
+
+### What `/etc/shadow` contains
+
+- Encrypted password
+- Password aging information
+- Password expiration details
+- Account expiration settings
+
+Unlike `/etc/passwd`, only the root user can read `/etc/shadow`.
+
+---
+
+# 10. Lock a User Account
+
+Lock a user's password:
+
+```bash
+sudo passwd -l joker
+```
+
+The user will no longer be able to log in using their password.
+
+---
+
+# 11. Unlock a User Account
+
+Unlock the account:
+
+```bash
+sudo passwd -u joker
+```
+
+Now the user can log in again.
+
+---
+
+# 12. Delete a User
+
+Delete only the user account:
+
+```bash
+sudo userdel username
+```
+
+Delete the user and their home directory:
+
+```bash
+sudo userdel -r bob
+```
+
+Verify deletion:
+
+```bash
+grep -w 'bob' /etc/passwd
+```
+
+Check home directory:
+
+```bash
+sudo ls -ld /home/bob
+```
+
+If deleted successfully:
+
+```
+No such file or directory
+```
+
+---
+
+# Important Files
+
+| File | Purpose |
+|------|---------|
+| `/etc/passwd` | Stores user account information |
+| `/etc/shadow` | Stores encrypted passwords and password policies |
+| `/home/username` | User's personal directory |
+| `/bin/bash` | Bash shell |
+| `/bin/sh` | Default POSIX shell |
+
+---
+
+# Common Commands Summary
+
+```bash
+# Create user
+sudo useradd joker
+
+# Create user with home directory
+sudo useradd -m bob
+
+# View user information
+grep -w 'joker' /etc/passwd
+
+# Set password
+sudo passwd joker
+
+# Change home directory
+sudo usermod -d /home/wayne joker
+
+# Change login shell
+sudo usermod -s /bin/bash joker
+
+# Add user to sudo group
+sudo usermod -aG sudo joker
+
+# Check user groups
+groups joker
+
+# Switch user
+su - joker
+
+# View encrypted passwords
+sudo cat /etc/shadow
+
+# Lock account
+sudo passwd -l joker
+
+# Unlock account
+sudo passwd -u joker
+
+# Delete user and home directory
+sudo userdel -r bob
+```
+
+---
+
+# Key Takeaways
+
+- `useradd` creates new users.
+- `-m` creates the user's home directory.
+- `passwd` sets or changes passwords.
+- `usermod` modifies user information.
+- `-d` changes the home directory.
+- `-s` changes the default shell.
+- `-aG` adds a user to a group without removing existing groups.
+- `/etc/passwd` stores user account details.
+- `/etc/shadow` securely stores encrypted passwords.
+- `passwd -l` locks a user account.
+- `passwd -u` unlocks a user account.
+- `userdel -r` removes both the user account and their home directory.
+
+---
+
+## Day 5 Complete 
+
+Today I learned the fundamentals of **Linux User Account Management**, including creating users, managing passwords, modifying user properties, managing groups, understanding `/etc/passwd` and `/etc/shadow`, and deleting user accounts. These are essential Linux administration skills and form the foundation for system administration and cybersecurity. 
