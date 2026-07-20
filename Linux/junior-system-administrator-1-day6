@@ -1,0 +1,228 @@
+# Day 6 - Junior System Administrator (LabEx)
+
+## Overview
+
+Today I started the **Junior System Administrator** learning path on LabEx after completing the **Quick Start with Linux** course.
+
+Completed Labs:
+- The Lay of the Land
+- The Digital Architect
+
+Unlike the previous days where I learned individual Linux commands, today's labs focused on using those commands together to solve practical system administration tasks.
+
+---
+
+# What I Learned
+
+## 1. Collecting System Information
+
+Linux provides commands to quickly inspect the operating system and current machine.
+
+### whoami
+
+Displays the currently logged-in user.
+
+```bash
+whoami
+```
+
+Example Output
+
+```
+labex
+```
+
+---
+
+### uname
+
+Displays the operating system name.
+
+```bash
+uname
+```
+
+Example
+
+```
+Linux
+```
+
+---
+
+### uname -a
+
+Displays detailed system information.
+
+```bash
+uname -a
+```
+
+Shows:
+
+- Kernel name
+- Hostname
+- Kernel version
+- Machine architecture
+- Operating system
+
+Example
+
+```
+Linux hostname 6.x.x x86_64 GNU/Linux
+```
+
+---
+
+### uptime
+
+Shows how long the system has been running.
+
+```bash
+uptime
+```
+
+It displays:
+
+- Current time
+- System uptime
+- Number of logged-in users
+- Load average
+
+---
+
+### top
+
+Displays running processes in real time.
+
+```bash
+top
+```
+
+Useful for:
+
+- Monitoring CPU usage
+- Monitoring memory usage
+- Finding resource-heavy processes
+
+Press **q** to quit.
+
+---
+
+# Creating a System Report
+
+I also learned how output redirection can be used to create reports.
+
+Example:
+
+```bash
+touch system_report.txt
+
+whoami > system_report.txt
+
+uname -a >> system_report.txt
+
+uptime >> system_report.txt
+```
+
+Here,
+
+- `>` creates or overwrites a file.
+- `>>` appends data to an existing file.
+
+---
+
+# Working with Project Files
+
+In today's lab I organized a software project by using commands learned previously.
+
+Commands used:
+
+```bash
+mkdir
+mv
+cp
+ls
+cat
+```
+
+Tasks included:
+
+- Creating folders
+- Moving files
+- Copying configuration files
+- Creating backup files
+- Viewing file contents
+
+---
+
+# Archiving Files with tar
+
+A new command I learned today was **tar**.
+
+The `tar` command is used to archive multiple files into a single file.
+
+Example:
+
+```bash
+tar -czf archive.tar.gz file1 file2
+```
+
+### Options
+
+| Option | Meaning |
+|---------|---------|
+| c | Create archive |
+| z | Compress using gzip |
+| f | Specify archive filename |
+
+Example:
+
+```bash
+tar -czf old_logs.tar.gz *_2023*.log
+```
+
+This creates a compressed archive containing only log files from 2023.
+
+---
+
+# Removing Files
+
+After creating the archive, the original files can be removed.
+
+```bash
+rm *_2023*.log
+```
+
+Always be careful when using wildcards (`*`) with `rm` because deleted files cannot be easily recovered.
+
+---
+
+# Key Takeaways
+
+Today I learned how Linux commands are combined to perform real system administration tasks instead of running them individually.
+
+Some important skills I practiced were:
+
+- Collecting system information
+- Organizing project directories
+- Creating backups
+- Archiving files
+- Compressing logs
+- Cleaning unnecessary files
+- Using output redirection to generate reports
+
+---
+
+# Commands Learned Today
+
+```bash
+uname
+uname -a
+uptime
+top
+tar
+rm
+```
+
+---
