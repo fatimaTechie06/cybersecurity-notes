@@ -1,0 +1,233 @@
+# Day 7 - Junior System Administrator: The Log Investigator
+
+## Overview
+
+Today I completed the **The Log Investigator** lab from the **Junior System Administrator** learning path on LabEx.
+
+The objective of this lab was to investigate application logs, compare configuration files, and identify system issues using Linux command-line tools. I also learned how Linux administrators use logs to troubleshoot problems.
+
+---
+
+# New Commands Learned
+
+## 1. grep
+
+The `grep` command searches for specific text or patterns inside files.
+
+### Syntax
+
+```bash
+grep [options] "pattern" filename
+```
+
+### Example
+
+```bash
+grep "ERROR" app.log
+```
+
+This displays all lines containing the word **ERROR**.
+
+### Useful Options
+
+| Option | Description |
+|---------|-------------|
+| `-w` | Match the whole word only |
+| `-i` | Ignore case (case-insensitive) |
+| `-E` | Enable extended regular expressions |
+
+### Example
+
+```bash
+grep -w "ERROR" app.log
+```
+
+---
+
+## Creating an Error Report
+
+Save matching log entries into a new file.
+
+```bash
+grep -w "ERROR" app.log > error_report.txt
+```
+
+Here:
+
+- `grep` searches for the pattern.
+- `>` redirects the output to a file.
+
+---
+
+## Appending More Information
+
+Add additional output to an existing report.
+
+```bash
+grep -w "worker_processes" nginx.conf >> error_report.txt
+```
+
+The `>>` operator appends data without overwriting the file.
+
+---
+
+# 2. dmesg
+
+The `dmesg` command displays kernel and hardware-related system messages.
+
+### Example
+
+```bash
+sudo dmesg
+```
+
+This command is useful for:
+
+- Checking boot messages
+- Investigating hardware issues
+- Troubleshooting driver problems
+
+---
+
+## Filtering dmesg Output
+
+```bash
+sudo dmesg | grep -iE "fail|error"
+```
+
+Explanation:
+
+- `|` sends the output of one command to another.
+- `grep` filters only lines containing **fail** or **error**.
+- `-i` ignores case.
+- `-E` allows multiple search patterns.
+
+---
+
+## Saving Boot Issues
+
+```bash
+sudo dmesg | grep -iE "fail|error" > boot_issues.txt
+```
+
+This creates a report containing only failure and error messages.
+
+---
+
+# 3. diff
+
+The `diff` command compares two files and displays their differences.
+
+### Syntax
+
+```bash
+diff file1 file2
+```
+
+### Example
+
+```bash
+diff staging/app.conf production/app.conf
+```
+
+Useful for comparing configuration files.
+
+---
+
+## Saving Comparison Results
+
+```bash
+diff file1 file2 > config_diff.txt
+```
+
+The differences are stored in a text file.
+
+---
+
+## Comparing Directories
+
+```bash
+diff -r server1_files server2_files
+```
+
+Option:
+
+| Option | Description |
+|---------|-------------|
+| `-r` | Compare directories recursively |
+
+This helps identify missing or different files.
+
+---
+
+# Linux Concepts Learned
+
+## Log Files
+
+Log files store information about:
+
+- Errors
+- Warnings
+- Events
+- Application activity
+- System activity
+
+Logs are one of the first places administrators investigate when troubleshooting issues.
+
+---
+
+## Command Pipeline (`|`)
+
+A pipeline sends the output of one command as input to another.
+
+Example:
+
+```bash
+sudo dmesg | grep error
+```
+
+This avoids manually searching through long command output.
+
+---
+
+## Output Redirection
+
+```bash
+>
+```
+
+Creates a new file or overwrites an existing file.
+
+```bash
+>>
+```
+
+Appends output to an existing file.
+
+---
+
+# Cybersecurity Relevance
+
+The commands learned today are widely used in cybersecurity.
+
+- **grep** → Search logs for suspicious activity or indicators of compromise.
+- **dmesg** → Investigate hardware, kernel, or boot-related issues.
+- **diff** → Compare configuration files to detect unauthorized changes.
+- **Pipelines** → Efficiently process and filter large amounts of data.
+
+---
+
+# Commands Learned Today
+
+```bash
+grep
+grep -w
+grep -i
+grep -E
+diff
+diff -r
+dmesg
+sudo dmesg
+```
+
+---
