@@ -1,0 +1,230 @@
+# Day 8 - Junior System Administrator: The Fortress Guardian
+
+## Overview
+
+Today I completed the **The Fortress Guardian** lab from the **Junior System Administrator** learning path on LabEx.
+
+This lab focused on securing a Linux project by managing file permissions, ownership, groups, and collaborative workspaces. I learned how Linux uses permissions to control access to files and directories, which is a fundamental concept in system administration and cybersecurity.
+
+---
+
+# New Commands Learned
+
+## 1. chmod
+
+The `chmod` command is used to change file and directory permissions.
+
+### Syntax
+
+```bash
+chmod [permissions] file_name
+```
+
+### Example
+
+```bash
+chmod 600 project_keys.txt
+```
+
+This sets the permissions to:
+
+- Owner: Read and Write
+- Group: No permissions
+- Others: No permissions
+
+This is commonly used for sensitive files such as SSH keys and configuration files.
+
+---
+
+## Understanding Numeric Permissions
+
+Each permission has a numeric value.
+
+| Permission | Value |
+|------------|------:|
+| Read (r) | 4 |
+| Write (w) | 2 |
+| Execute (x) | 1 |
+
+Examples:
+
+| Permission | Numeric |
+|------------|---------|
+| rwx | 7 |
+| rw- | 6 |
+| r-x | 5 |
+| r-- | 4 |
+| --- | 0 |
+
+Example:
+
+```bash
+chmod 750 project_directory
+```
+
+Permissions become:
+
+```
+Owner : rwx
+Group : r-x
+Others: ---
+```
+
+---
+
+## 2. chown
+
+The `chown` command changes the owner and group of a file or directory.
+
+### Syntax
+
+```bash
+sudo chown owner:group file
+```
+
+### Example
+
+```bash
+sudo chown -R dev_lead:developers ~/project/phoenix_project
+```
+
+### Option
+
+| Option | Description |
+|---------|-------------|
+| `-R` | Apply changes recursively to all files and subdirectories |
+
+---
+
+## 3. newgrp
+
+The `newgrp` command switches the current session to another group.
+
+Example:
+
+```bash
+newgrp developers
+```
+
+This allows the user to work with the permissions of the specified group without logging out.
+
+---
+
+## 4. setgid (g+s)
+
+The **setgid** permission on a directory ensures that all newly created files inherit the directory's group ownership.
+
+Example:
+
+```bash
+sudo chmod g+s ~/project/phoenix_project/src
+```
+
+After enabling setgid, any new file created inside the directory automatically belongs to the same group.
+
+This is very useful for collaborative projects.
+
+---
+
+# Viewing Permissions
+
+Use:
+
+```bash
+ls -l
+```
+
+Example output:
+
+```
+-rw------- project_keys.txt
+```
+
+Meaning:
+
+```
+Owner : Read + Write
+Group : No permission
+Others: No permission
+```
+
+---
+
+# Viewing Directory Permissions
+
+```bash
+ls -ld directory_name
+```
+
+The `-d` option displays information about the directory itself instead of its contents.
+
+---
+
+# Linux Concepts Learned
+
+## File Ownership
+
+Every file has:
+
+- Owner
+- Group
+- Others
+
+Linux checks permissions in this order whenever someone tries to access a file.
+
+---
+
+## Recursive Operations
+
+Using the `-R` option allows permission or ownership changes to apply to every file and folder inside a directory.
+
+Example:
+
+```bash
+sudo chown -R user:group project/
+```
+
+---
+
+## Collaborative Directories
+
+The setgid permission helps teams work together by ensuring that newly created files automatically inherit the directory's group.
+
+This avoids permission issues when multiple users collaborate on the same project.
+
+---
+
+# Cybersecurity Relevance
+
+The concepts learned today are essential for securing Linux systems.
+
+- Restrict access to sensitive files using `chmod`
+- Assign correct ownership with `chown`
+- Manage team permissions using groups
+- Use setgid for secure collaboration
+- Protect confidential data by following the principle of least privilege
+
+Proper permission management reduces the risk of unauthorized access and accidental modification of important files.
+
+---
+
+# Commands Learned Today
+
+```bash
+chmod
+chmod 600
+chmod 750
+chmod g+s
+chown
+chown -R
+newgrp
+ls -ld
+```
+
+---
+
+# Key Takeaways
+
+Today I learned how Linux controls access to files and directories through permissions, ownership, and groups. I also learned how the setgid permission enables secure collaboration by ensuring new files inherit the directory's group ownership. These concepts are fundamental for Linux administration and cybersecurity because they help protect sensitive data and enforce proper access control.
+
+---
