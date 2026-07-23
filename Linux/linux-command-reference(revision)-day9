@@ -1,0 +1,615 @@
+# Day 9 - Linux Command Reference Guide
+
+> A complete reference of Linux commands learned during the first nine days of my Linux learning journey.
+
+---
+
+# System Information & Package Management
+
+## echo
+
+Displays text on the terminal.
+
+```bash
+echo "Hello World"
+```
+
+---
+
+## id
+
+Displays information about the current user.
+
+```bash
+id
+```
+
+Example Output
+
+```
+uid=1000(user) gid=1000(user)
+```
+
+---
+
+## id -un
+
+Displays only the username.
+
+```bash
+id -un
+```
+
+---
+
+## whoami
+
+Shows the currently logged-in user.
+
+```bash
+whoami
+```
+
+---
+
+## sudo
+
+Runs a command with administrator (root) privileges.
+
+```bash
+sudo command
+```
+
+---
+
+## apt
+
+Ubuntu package manager.
+
+Examples
+
+```bash
+sudo apt update
+sudo apt upgrade
+sudo apt full-upgrade
+sudo apt autoremove
+apt list --upgradable
+```
+
+---
+
+## sudo reboot
+
+Restarts the computer.
+
+```bash
+sudo reboot
+```
+
+---
+
+## df -h
+
+Displays disk usage in human-readable format.
+
+```bash
+df -h
+```
+
+---
+
+## git --version
+
+Checks installed Git version.
+
+```bash
+git --version
+```
+
+---
+
+## code .
+
+Opens the current directory in Visual Studio Code.
+
+```bash
+code .
+```
+
+---
+
+# Navigation Commands
+
+## pwd
+
+Prints the current working directory.
+
+```bash
+pwd
+```
+
+---
+
+## ~
+
+Represents the Home directory.
+
+```bash
+echo ~
+```
+
+---
+
+## cd
+
+Change directory.
+
+```bash
+cd folder_name
+```
+
+Useful shortcuts
+
+```bash
+cd ..
+cd ~
+```
+
+---
+
+# Listing Files
+
+## ls
+
+List directory contents.
+
+```bash
+ls
+```
+
+Useful options
+
+```bash
+ls .
+ls ~
+ls -l
+ls -a
+ls -la
+ls -R
+```
+
+---
+
+# Creating Files & Directories
+
+## touch
+
+Create an empty file.
+
+```bash
+touch file.txt
+```
+
+---
+
+## mkdir
+
+Create a directory.
+
+```bash
+mkdir folder
+```
+
+Nested directories
+
+```bash
+mkdir -p parent/child
+```
+
+---
+
+# Writing into Files
+
+Overwrite file
+
+```bash
+echo "Hello" > file.txt
+```
+
+Append text
+
+```bash
+echo "World" >> file.txt
+```
+
+---
+
+# Copy Files
+
+```bash
+cp source destination
+```
+
+Copy directories
+
+```bash
+cp -r folder1 folder2
+```
+
+---
+
+# Move/Rename Files
+
+```bash
+mv old.txt new.txt
+```
+
+---
+
+# Delete Files
+
+```bash
+rm file.txt
+```
+
+Interactive delete
+
+```bash
+rm -i file.txt
+```
+
+Delete directory recursively
+
+```bash
+rm -r folder
+```
+
+Force delete
+
+```bash
+rm -rf folder
+```
+
+Remove empty directory
+
+```bash
+rmdir folder
+```
+
+---
+
+# Viewing File Contents
+
+## cat
+
+View complete file.
+
+```bash
+cat file.txt
+```
+
+Line numbers
+
+```bash
+cat -n file.txt
+```
+
+---
+
+## head
+
+First 10 lines.
+
+```bash
+head file.txt
+```
+
+Specify lines
+
+```bash
+head -n 5 file.txt
+```
+
+Bytes
+
+```bash
+head -c 20 file.txt
+```
+
+---
+
+## tail
+
+Last 10 lines.
+
+```bash
+tail file.txt
+```
+
+Specify lines
+
+```bash
+tail -n 5 file.txt
+```
+
+Bytes
+
+```bash
+tail -c 20 file.txt
+```
+
+---
+
+# Comparing Files
+
+Compare two files
+
+```bash
+diff file1 file2
+```
+
+Compare directories
+
+```bash
+diff -r folder1 folder2
+```
+
+---
+
+# Permissions
+
+View permissions
+
+```bash
+ls -l
+```
+
+Change permissions
+
+```bash
+chmod 700 file.txt
+chmod -R 755 folder
+chmod u+x script.sh
+chmod 600 secrets.txt
+chmod 750 project
+chmod 2770 shared_folder
+```
+
+Execute script
+
+```bash
+./script.sh
+```
+
+---
+
+# Ownership
+
+Change owner
+
+```bash
+sudo chown root:root file.txt
+```
+
+Recursive ownership
+
+```bash
+sudo chown -R root:root folder
+```
+
+Example
+
+```bash
+sudo chown -R dev_lead:developers project
+```
+
+---
+
+# User Management
+
+Create user
+
+```bash
+sudo useradd username
+```
+
+Create with home directory
+
+```bash
+sudo useradd -m username
+```
+
+View user
+
+```bash
+grep username /etc/passwd
+```
+
+Set password
+
+```bash
+sudo passwd username
+```
+
+Lock account
+
+```bash
+sudo passwd -l username
+```
+
+Unlock account
+
+```bash
+sudo passwd -u username
+```
+
+Delete user
+
+```bash
+sudo userdel -r username
+```
+
+Change home directory
+
+```bash
+sudo usermod -d /home/newhome username
+```
+
+Change shell
+
+```bash
+sudo usermod -s /bin/bash username
+```
+
+Add to sudo group
+
+```bash
+sudo usermod -aG sudo username
+```
+
+Check groups
+
+```bash
+groups username
+```
+
+Switch user
+
+```bash
+su - username
+```
+
+Encrypted passwords
+
+```bash
+sudo cat /etc/shadow
+```
+
+---
+
+# Log Investigation
+
+Search text
+
+```bash
+grep ERROR app.log
+```
+
+Exact word
+
+```bash
+grep -w ERROR app.log
+```
+
+Case insensitive
+
+```bash
+grep -i error app.log
+```
+
+Multiple patterns
+
+```bash
+grep -iE 'fail|error'
+```
+
+Redirect output
+
+```bash
+grep ERROR app.log > report.txt
+```
+
+Append output
+
+```bash
+grep worker nginx.conf >> report.txt
+```
+
+---
+
+# Kernel Logs
+
+```bash
+sudo dmesg
+```
+
+Search boot errors
+
+```bash
+sudo dmesg | grep -iE 'fail|error'
+```
+
+---
+
+# Useful Symbols
+
+| Symbol | Meaning |
+|---------|----------|
+| `>` | Overwrite file |
+| `>>` | Append to file |
+| `|` | Pipe output |
+| `~` | Home directory |
+| `.` | Current directory |
+| `..` | Parent directory |
+| `-R` | Recursive |
+| `-r` | Recursive (depends on command) |
+| `-a` | Show hidden files |
+| `-l` | Long listing |
+| `-h` | Human readable |
+
+---
+
+# Commands Learned So Far
+
+- echo
+- id
+- id -un
+- whoami
+- sudo
+- apt
+- df
+- git
+- code
+- pwd
+- cd
+- ls
+- touch
+- mkdir
+- cp
+- mv
+- rm
+- rmdir
+- cat
+- head
+- tail
+- diff
+- chmod
+- chown
+- grep
+- dmesg
+- useradd
+- usermod
+- passwd
+- groups
+- su
+- userdel
+- man
+
+---
+
+## Progress
+
+**Topics Covered**
+
+- Linux Basics
+- Package Management
+- Navigation
+- File Management
+- Permissions
+- Ownership
+- User Management
+- Log Investigation
+- File Comparison
+- Linux Security Basics
+
+Next: Build a mini Linux administration project using everything learned so far.
