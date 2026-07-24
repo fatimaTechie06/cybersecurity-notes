@@ -1,0 +1,7 @@
+[2026-07-24 08:45:13] LOGIN SUCCESS: fatima from 192.168.1.15
+[2026-07-24 08:52:41] LOGIN FAILED: admin from 203.45.122.17
+[2026-07-24 08:53:02] LOGIN FAILED: root from 203.45.122.17
+[2026-07-24 08:53:29] LOGIN FAILED: administrator from 203.45.122.17
+[2026-07-24 08:55:47] PASSWORD CHANGED: user fatima
+[2026-07-24 09:10:55] LOGIN SUCCESS: shifa from 192.168.1.20
+[2026-07-24 09:25:00] ALERT: Multiple failed login attempts detected.

@@ -1,0 +1,7 @@
+Name: Fatima, Age: 23, Designation: Cybersecurity Engineer, Salary: 300000
+Name: Shifa, Age: 26, Designation: Software Engineer, Salary: 200000
+Name: Siddhi, Age: 25, Designation: QA Engineer, Salary: 400000
+Name: Riya, Age: 25, Designation: DevOps Engineer, Salary: 500000
+Name: Archana, Age: 24, Designation: Product Manager, Salary: 200000
+Name: Vaishnavi, Age: 23, Designation: UX Designer, Salary: 300000
+Name: Rutuja, Age: 27, Designation: Project Manager, Salary: 400000

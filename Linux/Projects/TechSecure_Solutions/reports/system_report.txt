@@ -1,0 +1,11 @@
+fatima-tirandaj
+Linux fatima-tirandaj-Inspiron-15-3520 7.0.0-28-generic #28~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 15:50:57 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+ 23:40:45 up  2:44,  1 user,  load average: 0.54, 0.34, 0.30
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           763M  3.0M  760M   1% /run
+/dev/nvme0n1p8   48G   17G   29G  37% /
+tmpfs           3.8G     0  3.8G   0% /dev/shm
+tmpfs           5.0M  8.0K  5.0M   1% /run/lock
+efivarfs        438K  272K  162K  63% /sys/firmware/efi/efivars
+/dev/nvme0n1p1  396M  103M  294M  26% /boot/efi
+tmpfs           763M  124K  763M   1% /run/user/1000
