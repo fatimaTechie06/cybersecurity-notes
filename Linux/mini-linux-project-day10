@@ -1,0 +1,83 @@
+# Linux Day 10 - Mini Project
+
+## Project Name
+
+TechSecure Solutions - Linux File Management Project
+
+## Objective
+
+Simulate a company's file system using Linux commands while practicing directory management, permissions, user management, searching, backups, and reporting.
+
+---
+
+## Project Structure
+
+techsecure-solutions/
+├── employees/
+├── projects/
+├── confidential/
+├── logs/
+├── reports/
+├── backups/
+└── config/
+
+---
+
+## Tasks Performed
+
+- Created company directory structure
+- Added employee records
+- Created project files
+- Generated server logs
+- Generated security logs
+- Created error reports using grep
+- Protected confidential files using chmod
+- Changed ownership using chown
+- Compared configuration files using diff
+- Created compressed backups using tar
+- Generated system report
+- Created and managed Linux users
+- Searched records using grep
+- Counted records using wc
+
+---
+
+## Linux Commands Practiced
+
+mkdir
+cd
+ls
+touch
+echo
+cat
+grep
+wc
+chmod
+chown
+tar
+cp
+mv
+diff
+whoami
+uname
+uptime
+df
+useradd
+userdel
+groups
+id
+getent
+
+---
+
+## Skills Learned
+
+- Linux file management
+- Directory organization
+- File permissions
+- Ownership management
+- Log management
+- User administration
+- Searching files
+- Backup creation
+- System monitoring
